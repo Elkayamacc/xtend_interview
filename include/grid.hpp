@@ -1,0 +1,53 @@
+#pragma once
+
+#include <functional>
+#include <list>
+#include <memory>
+
+#include "config.hpp"
+#include "trajectory.hpp"
+#include <sys/ioctl.h>
+#include <unistd.h>
+
+namespace iron_dome_game
+{
+
+struct Entity;
+
+// Two points, representing a rectangle around an entity
+struct BoundingBox
+{
+    Pos p1;
+    Pos p2;
+};
+
+class Grid
+{
+public:
+    Grid() = default;
+    ~Grid() = default;
+
+    void draw();
+    void refresh();
+
+    uint16_t rows() { return GRID_ROWS; }
+    uint16_t columns() { return GRID_COLUMNS; }
+
+    bool drawPixel(uint16_t row, uint16_t col, char pixel);
+
+    void addEntity(std::shared_ptr<Entity> entity) { m_entities.push_back(entity); }
+
+    uint16_t checkHits();
+    void searchForIntersects(const bool& gameIsActive);
+
+private:
+    void forEveryPixel(std::function<void(int row, int col)> function, const int rowCount = GRID_ROWS, const int columnCount = GRID_COLUMNS);
+
+    static bool intersects(const std::shared_ptr<Entity> first, const std::shared_ptr<Entity> second);
+    
+    const static bool areOverlapping(const BoundingBox& boundingBox1, const BoundingBox& boundingBox2);
+    char m_grid[GRID_ROWS][GRID_COLUMNS];
+    u_int16_t m_Hits = 0;
+    std::list<std::shared_ptr<Entity>> m_entities;
+};
+}
