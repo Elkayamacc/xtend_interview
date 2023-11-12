@@ -38,6 +38,7 @@ public:
     void addEntity(std::shared_ptr<Entity> entity) { m_entities.push_back(entity); }
 
     uint16_t checkHits();
+    
     void searchForIntersects(const bool& gameIsActive);
 
 private:

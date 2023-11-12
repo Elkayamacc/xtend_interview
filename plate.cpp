@@ -17,7 +17,7 @@ Plate::Plate(Velocity velocity)
 
 void Plate::drawOnGrid(Grid &grid)
 {
-    if(pos().isOutOfBoundry())
+    if (pos().isOutOfBoundry())
     {
         m_isActive = false;
         return;

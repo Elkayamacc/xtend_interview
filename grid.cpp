@@ -40,7 +40,7 @@ void Grid::refresh()
 
     for (auto entity = m_entities.begin() ; entity != m_entities.end(); )
     {
-        if((*entity)->isActive())
+        if ((*entity)->isActive())
         {
             (*entity)->drawOnGrid(*this);
             entity++;
@@ -92,13 +92,13 @@ void Grid::searchForIntersects(const bool& gameIsActive)
     {
         for (auto Rocket : m_entities)
         {
-            if(Rocket->isActive() && Rocket->type() == EntityType::ROCKET)
+            if (Rocket->isActive() && Rocket->type() == EntityType::ROCKET)
             {
                 for(auto Plate : m_entities)
                 {
-                    if(Plate->isActive() && Plate->type() == EntityType::PLATE)
+                    if (Plate->isActive() && Plate->type() == EntityType::PLATE)
                     {
-                        if(intersects(Rocket, Plate))
+                        if (intersects(Rocket, Plate))
                         {
                             Plate->setIsActive(false);
                             Rocket->setIsActive(false);
@@ -116,7 +116,7 @@ void Grid::searchForIntersects(const bool& gameIsActive)
 
 bool Grid::intersects(const std::shared_ptr<Entity> first, const std::shared_ptr<Entity> second) 
 {
-    if(areOverlapping(first->boundingBox(), second->boundingBox()))
+    if (areOverlapping(first->boundingBox(), second->boundingBox()))
         return true;
     return false;
 }

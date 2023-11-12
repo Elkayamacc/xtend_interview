@@ -17,7 +17,7 @@ Rocket::Rocket(Velocity velocity)
 
 void Rocket::drawOnGrid(Grid &grid)
 {
-    if(pos().isOutOfBoundry())
+    if (pos().isOutOfBoundry())
     {
         m_isActive = false;
         return;
