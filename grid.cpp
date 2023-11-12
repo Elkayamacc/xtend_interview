@@ -116,9 +116,7 @@ void Grid::searchForIntersects(const bool& gameIsActive)
 
 bool Grid::intersects(const std::shared_ptr<Entity> first, const std::shared_ptr<Entity> second) 
 {
-    if (areOverlapping(first->boundingBox(), second->boundingBox()))
-        return true;
-    return false;
+    return areOverlapping(first->boundingBox(), second->boundingBox());
 }
 
 //============================================================================//
